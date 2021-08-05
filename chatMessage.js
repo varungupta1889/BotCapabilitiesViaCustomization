@@ -38,48 +38,8 @@ export default class ChatMessageDefaultUI extends BaseChatMessage {
             this.content = 'https://www.youtube.com/embed/' + contentValue
         } else if (this.isCustomCaseForm) {
             this.content = contentValue;
-        } /*else if (this.isNavigate) {
-            const url = this.extractOriginalUrl(contentValue);
-            window.open(url);
-            this.content = `Opening ${url}`;
-        } else if (this.isImage) {
-            this.content = this.extractOriginalUrl(contentValue);
         } 
-        else if (this.isUrl) {
-            this.content = this.extractOriginalUrl(contentValue);
-            const urlEncoded = encodeURIComponent(this.content);
-            const requestURL = 'https://opengraph.io/api/1.1/site/' + urlEncoded + '?app_id=' + OPENGRAPH_API_KEY;
-            fetch(requestURL, { method: "GET" })
-                .then(response => {
-                    return response.json();
-                })
-                .then(jsonResponse => {
-                    if(jsonResponse.hybridGraph) {
-                        this.ogpMeta.title = jsonResponse.hybridGraph.title;
-                        this.ogpMeta.description = jsonResponse.hybridGraph.description;
-                        this.ogpMeta.image = jsonResponse.hybridGraph.image;
-                        this.ogpMeta.site_name = jsonResponse.hybridGraph.site_name;
-                    }
-                })
-        } else {
-            this.content = contentValue
-                .replace(/&lt;/g, '<')
-                .replace(/&gt;/g, '>')
-                .replace(/&quot;/g, '\"')
-                .replace(/<a href='mailto:.*?' target='_blank'>(.*?)<\/a>/g, '$1')
-                .replace(/<a href='/g, '')
-                .replace(/' target='_blank'.*?<\/a>( +)/g, '$1')
-                .replace(/' target='_blank'.*?<\/a>.*?<\/a>/g, '');
-        }*/
     }
-
-    /*extractOriginalUrl(generatedString) {
-        const matched = generatedString.match(/<a href.+>(.*?)<\/a>/);
-        if (matched.length > 1) {
-            return matched[1];
-        }
-        return generatedString;
-    }*/
 
     fallback(event) {
         event.target.onerror = null;
@@ -118,8 +78,4 @@ export default class ChatMessageDefaultUI extends BaseChatMessage {
     get isNavigate() {
         return this.messageType === NAVIGATE_MESSAGE_PREFIX;
     }
-
-    /*get hasOGPInfo() {
-        return this.ogpMeta.title !== undefined;
-    }*/
 }
